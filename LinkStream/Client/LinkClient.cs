@@ -28,13 +28,9 @@ namespace LinkStream.Client
             IDataProtectionProvider provider = DataProtectionProvider.Create("LinkStream");
             Protector = provider.CreateProtector("GateKeeper");
             if (_LinkServerIP == "127.0.0.1")
-            {
-                isLocal= true;
-            }
-            else 
-            {
-                isLocal = false; 
-            }
+                isLocal = true;
+            else
+                isLocal = false;
         }
         public string EncryptPacket(string message)
         {

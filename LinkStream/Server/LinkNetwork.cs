@@ -41,16 +41,9 @@ namespace LinkStream.Server
             //KEEP IT LOCAL for maximum security - Make sure ports being used are not open on your network.
             //If you are using LinkStream for a remote connection between dapps make sure to whitelist IP access to specific ports.
             if (_LinkServerIP == "127.0.0.1")
-            {
                 isLocal= true;
-              
-            }
             else
-            {
                 isLocal = false;
-            }
-               
-            
         }
         public void TriggerSignRequest(string _transactionMessage)
         {
@@ -62,17 +55,13 @@ namespace LinkStream.Server
             EventHandler<SignRequestEventArgs> SignEvent = signatureRequestEvent;
 
             if (SignEvent != null)
-            {
                 SignEvent(this, e);
-            }
         }
         public async Task LinkStream()
         {
             try
             {
-
                 LinkServer = new TcpListener(LinkServerIP, LinkPort);
-
                 Byte[] bytes = new Byte[1400];
 
                 LinkServer.Start();
@@ -86,13 +75,9 @@ namespace LinkStream.Server
                     string response = string.Empty;
                     string data_decrypted = string.Empty;
                     if (isLocal)
-                    {
                         data_decrypted = Protector.Unprotect(data);
-                    }
                     else
-                    {
                         data_decrypted = data;
-                    }
                     
                     try
                     {
@@ -107,7 +92,6 @@ namespace LinkStream.Server
                     LinkClient.Close();
                     stream.Dispose();
                     LinkClient.Dispose();
-                    stream = null;
                     LinkClient = null;
                 }
             }
