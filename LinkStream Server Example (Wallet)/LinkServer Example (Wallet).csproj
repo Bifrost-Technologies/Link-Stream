@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>LinkStream_Server_Example__Wallet_</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chaos.NaCl.Standard" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Solnet Link\Link Stream.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Solnet.Extensions">
+      <HintPath>..\..\Solnet7.0\src\Solnet.Extensions\bin\Debug\net6.0\Solnet.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Solnet.KeyStore">
+      <HintPath>..\..\Solnet7.0\src\Solnet.KeyStore\bin\Debug\net6.0\Solnet.KeyStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Solnet.Programs">
+      <HintPath>..\..\Solnet7.0\src\Solnet.Programs\bin\Debug\net6.0\Solnet.Programs.dll</HintPath>
+    </Reference>
+    <Reference Include="Solnet.Rpc">
+      <HintPath>..\..\Solnet7.0\src\Solnet.Rpc\bin\Debug\net6.0\Solnet.Rpc.dll</HintPath>
+    </Reference>
+    <Reference Include="Solnet.Wallet">
+      <HintPath>..\..\Solnet7.0\src\Solnet.Wallet\bin\Debug\net6.0\Solnet.Wallet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
