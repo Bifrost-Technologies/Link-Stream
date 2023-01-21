@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Solnet Link\Link Stream.csproj" />
+    <ProjectReference Include="..\LinkStream\Link Stream.csproj" />
   </ItemGroup>
 
   <ItemGroup>

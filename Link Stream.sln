@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Link Stream", "LinkStream\Link Stream.csproj", "{9B875A4C-1E95-44F1-80AC-D3C0D2F08786}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkClient Example (Dapp)", "LinkClient Example (Wallet)\LinkClient Example (Dapp).csproj", "{26CE512D-208D-4688-B533-EAC6C051A5D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkClient Example (Dapp)", "LinkClient Example (Dapp)\LinkClient Example (Dapp).csproj", "{26CE512D-208D-4688-B533-EAC6C051A5D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkServer Example (Wallet)", "LinkStream Server Example (Wallet)\LinkServer Example (Wallet).csproj", "{BEC68941-405F-46E2-BE5A-61CF708BC984}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkServer Example (Wallet)", "LinkServer Example (Wallet)\LinkServer Example (Wallet).csproj", "{BEC68941-405F-46E2-BE5A-61CF708BC984}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
