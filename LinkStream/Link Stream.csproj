@@ -17,7 +17,7 @@
     <RepositoryType>git</RepositoryType>
     <Authors>Bifrost Inc</Authors>
     <PackageTags>solana, solnet, bifrost, linkstream, link, stream</PackageTags>
-    <Version>6.0.0</Version>
+    <Version>6.0.1</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
