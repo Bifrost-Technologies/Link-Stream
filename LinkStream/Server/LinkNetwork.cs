@@ -23,6 +23,8 @@ namespace LinkStream.Server
         public string? LinkServiceName { get; set; }
         public bool isOnline { get; set; }
         public bool isLocal { get; set; }
+
+        public bool encryptionEnabled { get; set; }
         public Int32 LinkPort { get; set; }
         private TcpListener? LinkServer { get; set; }
         private TcpClient? LinkClient { get; set; }
@@ -31,11 +33,12 @@ namespace LinkStream.Server
 
         public event EventHandler<SignRequestEventArgs> signatureRequestEvent;
 
-        public LinkNetwork(Int32 _LinkPort, string _LinkServerIP = "127.0.0.1", string _LinkServerName = "")
+        public LinkNetwork(Int32 _LinkPort, string _LinkServerIP = "127.0.0.1", string _LinkServerName = "", bool _encryptionEnabled = false)
         {
             LinkServerIP = IPAddress.Parse(_LinkServerIP);
             LinkPort = _LinkPort;
-            LinkServiceName = _LinkServerName;  
+            LinkServiceName = _LinkServerName;
+            encryptionEnabled = _encryptionEnabled;
             IDataProtectionProvider provider = DataProtectionProvider.Create("LinkStream");
             Protector = provider.CreateProtector("GateKeeper");
             //KEEP IT LOCAL for maximum security - Make sure ports being used are not open on your network.
@@ -65,8 +68,10 @@ namespace LinkStream.Server
                 Byte[] bytes = new Byte[1400];
 
                 LinkServer.Start();
-                while (isOnline == true)
-                {
+                isOnline= true;
+                while (isOnline)
+                { try
+                    {
                     LinkClient = await LinkServer.AcceptTcpClientAsync();
                     NetworkStream stream = LinkClient.GetStream();
 
@@ -74,25 +79,25 @@ namespace LinkStream.Server
                     string data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                     string response = string.Empty;
                     string data_decrypted = string.Empty;
-                    if (isLocal)
+                    if (isLocal && encryptionEnabled)
                         data_decrypted = Protector.Unprotect(data);
                     else
                         data_decrypted = data;
-                    
-                    try
-                    {
-                       await PacketProcessor.ReadStreamRequest(this, data_decrypted);
-                    }
-                    catch (Exception packetIssues)
-                    {
-                        Debug.WriteLine(packetIssues);
-                    }
-                    //Clears and recycles the client
+
+                    response = await PacketProcessor.ReadStreamRequest(this, data_decrypted);
+                    Byte[] response_data = System.Text.Encoding.ASCII.GetBytes(response);
+                    await stream.WriteAsync(response_data, 0, response_data.Length);
                     stream.Close();
                     LinkClient.Close();
                     stream.Dispose();
                     LinkClient.Dispose();
                     LinkClient = null;
+                    }
+                    catch (Exception packetIssues)
+                    {
+                        Debug.WriteLine(packetIssues);
+                    }
+                  
                 }
             }
             catch (Exception ae)

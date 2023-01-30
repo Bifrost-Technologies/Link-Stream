@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using Solnet.Rpc.Core.Http;
 
 //Initialize the Link Server - Port must match - Every dapp should use a unique port to prevent socket issues. 50505 is an example port.
-LinkNetwork _LinkNetwork = new LinkNetwork(50505, "Pseudo Wallet");
+LinkNetwork _LinkNetwork = new LinkNetwork(50505,  _LinkServerName: "Pseudo Wallet App");
 //Setting a request handler event is required in order to respond to the packets in the packetprocessor. 
 _LinkNetwork.signatureRequestEvent += HandleRequestEvent;
 //When integrating LinkStream into applications force this task to run in the background. In this example it runs on the main thread but ideally you want it to run on its own thread to prevent thread blocking issues.

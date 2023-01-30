@@ -11,12 +11,12 @@ using LinkStream.Packets;
 using System.Diagnostics;
 
 //Initialize the LinkStream Client - Match the port to the server. 
-LinkClient linkClient = new LinkClient(50505, "Pseudo Dapp");
+LinkClient linkClient = new LinkClient(50505, _LinkClientName: "Pseudo Dapp/Game");
 
 IRpcClient rpcClient = ClientFactory.GetClient(Cluster.MainNet);
-PublicKey fromAccount = new PublicKey("test address here");
+PublicKey fromAccount = new PublicKey("ENTER WALLET ADDRESS HERE");
 RequestResult<ResponseValue<LatestBlockHash>> blockHash = rpcClient.GetLatestBlockHash();
-Console.WriteLine($"BlockHash >> {blockHash.Result.Value.Blockhash}");
+
 
 byte[] transactionMessage = new TransactionBuilder()
     .SetRecentBlockHash(blockHash.Result.Value.Blockhash)
@@ -26,4 +26,7 @@ byte[] transactionMessage = new TransactionBuilder()
 
 
 await linkClient.SendPacket(LinkPackets.CraftPacket(linkClient, LinkStream.Types.PacketTypes.RequestSignature, Convert.ToBase64String(transactionMessage)));
+Console.WriteLine(Convert.ToBase64String(transactionMessage));
+
+
 Console.ReadKey();

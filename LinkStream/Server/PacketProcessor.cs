@@ -11,7 +11,7 @@ namespace LinkStream.Server
 {
     public static class PacketProcessor
     {
-        public static async Task ReadStreamRequest(LinkNetwork _LinkServer, string data)
+        public static async Task<string> ReadStreamRequest(LinkNetwork _LinkServer, string data)
         {
             try
             {
@@ -20,21 +20,26 @@ namespace LinkStream.Server
                 {
                     string transactionMessage = data_received[1];
                     _LinkServer.TriggerSignRequest(transactionMessage);
+                    return "Transaction request received successfully";
+                }
+                else
+                {
+                    return "Packet is invalid";
                 }
             }
             catch (Exception hk)
             {
                 Console.WriteLine(hk);
+                return "Error occured during packet processing";
             }
             await Task.CompletedTask;
         }
         public static string DecodeTransactionMessage(ReadOnlySpan<byte> messageData)
         {
-            List<DecodedInstruction> ix =
-                InstructionDecoder.DecodeInstructions(Message.Deserialize(messageData));
+            List<DecodedInstruction> ix = InstructionDecoder.DecodeInstructions(Message.Deserialize(messageData));
 
             string aggregate = ix.Aggregate(
-                "Decoded Instructions:",
+                "",
                 (s, instruction) =>
                 {
                     s += $"\n\tProgram: {instruction.ProgramName}\n\t\t\t Instruction: {instruction.InstructionName}\n";

@@ -18,7 +18,7 @@ namespace LinkStream.Packets
             {
                 case 0:
                 {
-                        if (_linkClient.isLocal == true)
+                        if (_linkClient.isLocal && _linkClient.encryptedStream)
                             return _linkClient.EncryptPacket("RequestSignature" + "|" + tx_message);
                         else
                             return "RequestSignature" + "|" + tx_message;
@@ -26,7 +26,7 @@ namespace LinkStream.Packets
                 }
                 case 1:
                 {
-                        if (_linkClient.isLocal == true)
+                        if (_linkClient.isLocal && _linkClient.encryptedStream)
                             return _linkClient.EncryptPacket("GetWalletAddress");
                         else
                             return "GetWalletAddress";
