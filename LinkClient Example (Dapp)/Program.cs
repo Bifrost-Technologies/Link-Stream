@@ -1,4 +1,5 @@
-﻿using Org.BouncyCastle.Utilities;
+﻿using LinkStream.Client;
+using LinkStream.Packets;
 using Solnet.Programs;
 using Solnet.Rpc;
 using Solnet.Rpc.Builders;
@@ -6,9 +7,6 @@ using Solnet.Rpc.Core.Http;
 using Solnet.Rpc.Messages;
 using Solnet.Rpc.Models;
 using Solnet.Wallet;
-using LinkStream.Client;
-using LinkStream.Packets;
-using System.Diagnostics;
 
 //Initialize the LinkStream Client - Match the port to the server. 
 LinkClient linkClient = new LinkClient(50505, _LinkClientName: "Pseudo Dapp/Game");

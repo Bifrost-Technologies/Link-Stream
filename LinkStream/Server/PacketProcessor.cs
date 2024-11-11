@@ -1,17 +1,12 @@
 ﻿using Solnet.Programs;
 using Solnet.Rpc.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkStream.Server
 {
     public static class PacketProcessor
     {
-        public static async Task<string> ReadStreamRequest(LinkNetwork _LinkServer, string data)
+        public static string ReadStreamRequest(LinkNetwork _LinkServer, string data)
         {
             try
             {
@@ -20,10 +15,12 @@ namespace LinkStream.Server
                 {
                     string transactionMessage = data_received[1];
                     _LinkServer.TriggerSignRequest(transactionMessage);
+
                     return "Transaction request received successfully";
                 }
                 else
                 {
+
                     return "Packet is invalid";
                 }
             }
@@ -32,7 +29,6 @@ namespace LinkStream.Server
                 Console.WriteLine(hk);
                 return "Error occured during packet processing";
             }
-            await Task.CompletedTask;
         }
         public static string DecodeTransactionMessage(ReadOnlySpan<byte> messageData)
         {

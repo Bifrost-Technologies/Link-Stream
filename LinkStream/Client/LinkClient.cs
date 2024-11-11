@@ -1,12 +1,6 @@
 ﻿using Microsoft.AspNetCore.DataProtection;
-using Org.BouncyCastle.Utilities.Net;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkStream.Client
 {
@@ -50,7 +44,7 @@ namespace LinkStream.Client
                 //Packet is sent to LinkStream Server
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(craftedPacket);
                 LinkStream = Client.GetStream();
-                await LinkStream.WriteAsync(data, 0, data.Length); 
+                await LinkStream.WriteAsync(data, 0, data.Length);
 
                 //Clear byte array and begin awaiting reading the response
                 data = new Byte[256];
