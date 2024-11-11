@@ -1,6 +1,5 @@
 ﻿using LinkStream.Server;
 using Solnet.Rpc;
-using Solnet.Rpc.Core.Http;
 using Solnet.Rpc.Models;
 using Solnet.Wallet;
 
@@ -31,5 +30,6 @@ async void HandleRequestEvent(object? sender, SignRequestEventArgs e)
     List<byte[]> signatures = new() { signedTransaction };
     Transaction tx = Transaction.Populate(Message.Deserialize(transactionMessage), signatures);
 
-    RequestResult<string> _tx = await rpcClient.SendTransactionAsync(tx.Serialize());
+    _LinkNetwork.SetOutboundMessage(Convert.ToBase64String(tx.Serialize()));
+    await Task.CompletedTask;
 }

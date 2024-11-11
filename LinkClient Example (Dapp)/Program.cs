@@ -22,9 +22,9 @@ byte[] transactionMessage = new TransactionBuilder()
     .AddInstruction(MemoProgram.NewMemoV2("LinkStream Client Test!"))
     .CompileMessage();
 
-
-await linkClient.SendPacket(LinkPackets.CraftPacket(linkClient, LinkStream.Types.PacketTypes.RequestSignature, Convert.ToBase64String(transactionMessage)));
-Console.WriteLine(Convert.ToBase64String(transactionMessage));
+//Retrieve serialized tx and send it to an RPC to be processed etc
+string tx = await linkClient.SendPacket(LinkPackets.CraftPacket(linkClient, LinkStream.Types.PacketTypes.RequestSignature, Convert.ToBase64String(transactionMessage)));
+Console.WriteLine(tx);
 
 
 Console.ReadKey();
